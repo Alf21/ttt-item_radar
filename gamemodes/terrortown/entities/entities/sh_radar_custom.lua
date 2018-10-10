@@ -1,5 +1,5 @@
 if SERVER then
-    AddCSLuaFile()
+	AddCSLuaFile()
 end
 
 EQUIP_RADAR_CUSTOM = GenerateNewEquipmentID and GenerateNewEquipmentID() or 16
