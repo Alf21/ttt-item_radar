@@ -34,7 +34,7 @@ concommand.Add("ttt_radar_custom_scan", function(ply, cmd, args)
 					pos.y = math.Round(pos.y)
 					pos.z = math.Round(pos.z)
 
-					local role = p:IsPlayer() and (TTT2 and p:GetSubRole() or p:GetRole()) or 0
+					local role = p:IsPlayer() and (TTT2 and p:GetSubRole() or not TTT2 and p:GetRole()) or 0
 
 					if not p:IsPlayer() then
 						-- Decoys appear as innocents for non-traitors

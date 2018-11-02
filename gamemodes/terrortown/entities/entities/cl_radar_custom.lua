@@ -137,17 +137,17 @@ else
 
 				if TTT2 then
 					local roleData = GetRoleByIndex(role)
+					local c = roleData.radarColor
 
-					if role == ROLE_DETECTIVE then
-						surface.SetDrawColor(0, 0, 255, alpha)
-						surface.SetTextColor(0, 0, 255, alpha)
-					elseif role == ROLE_INNOCENT then
-						surface.SetDrawColor(0, 255, 0, alpha)
-						surface.SetTextColor(0, 255, 0, alpha)
-					elseif roleData.radarColor then
-						local c = roleData.radarColor
+					if c then
 						surface.SetDrawColor(c.r, c.g, c.b, alpha)
 						surface.SetTextColor(c.r, c.g, c.b, alpha)
+					elseif role == ROLE_DETECTIVE or roleData.baserole == ROLE_DETECTIVE then
+						surface.SetDrawColor(0, 0, 255, alpha)
+						surface.SetTextColor(0, 0, 255, alpha)
+					elseif role == ROLE_INNOCENT or roleData.baserole == ROLE_INNOCENT then
+						surface.SetDrawColor(0, 255, 0, alpha)
+						surface.SetTextColor(0, 255, 0, alpha)
 					else
 						surface.SetDrawColor(255, 0, 0, alpha)
 						surface.SetTextColor(255, 0, 0, alpha)
@@ -186,7 +186,7 @@ else
 		RADAR_CUSTOM.targets = {}
 
 		for i = 1, num_targets do
-			local r = net.ReadUInt(ROLES and ROLE_BITS or 2)
+			local r = net.ReadUInt(TTT2 and ROLE_BITS or 2)
 
 			local pos = Vector()
 			pos.x = net.ReadInt(32)
