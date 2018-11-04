@@ -148,9 +148,12 @@ else
 					elseif role == ROLE_INNOCENT or roleData.baserole == ROLE_INNOCENT then
 						surface.SetDrawColor(0, 255, 0, alpha)
 						surface.SetTextColor(0, 255, 0, alpha)
-					else
+					elseif role == ROLE_TRAITOR or roleData.baserole == ROLE_TRAITOR then
 						surface.SetDrawColor(255, 0, 0, alpha)
 						surface.SetTextColor(255, 0, 0, alpha)
+					else
+						surface.SetDrawColor(120, 120, 120, alpha)
+						surface.SetTextColor(120, 120, 120, alpha)
 					end
 				else
 					if role == ROLE_DETECTIVE then

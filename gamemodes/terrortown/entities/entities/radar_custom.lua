@@ -47,12 +47,16 @@ concommand.Add("ttt_radar_custom_scan", function(ply, cmd, args)
 						if not TTT2 then
 							role = ROLE_INNOCENT
 						else
-							local rd = GetRoleByIndex(role)
+							local tmp = hook.Run("TTT2ModifyRadarRole", ply, p)
 
-							if ply:GetTeam() ~= TEAM_TRAITOR then
+							if tmp then
+								role = tmp
+							elseif not ply:HasTeam(TEAM_TRAITOR) then
 								role = ROLE_INNOCENT
-							elseif not rd.visibleForTraitors then
-								role = ply:GetTeam() == TEAM_TRAITOR and ROLE_TRAITOR or ROLE_INNOCENT
+							elseif not ply:GetSubRoleData().visibleForTraitors then
+								role = ROLE_TRAITOR
+							else
+								role = (p:IsInTeam(ply) or p:GetSubRoleData().visibleForTraitors) and p:GetSubRole() or ROLE_INNOCENT
 							end
 						end
 					end
